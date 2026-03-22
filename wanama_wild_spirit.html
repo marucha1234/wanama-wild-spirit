@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WANAMA &mdash; Wild Spirit &middot; Hybrid Campaign</title>
+<meta name="description" content="Where AI meets reality. A hybrid fashion campaign blending generative imagery with real models across the Argentine frontier.">
+
+<!-- Open Graph para LinkedIn / redes sociales -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://wanama-wild-spirit.netlify.app/" />
+<meta property="og:title" content="WANAMA — Wild Spirit · Hybrid Campaign" />
+<meta property="og:description" content="Where AI meets reality. A hybrid fashion campaign blending generative imagery with real models across the Argentine frontier." />
+<meta property="og:image" content="https://wanama-wild-spirit.netlify.app/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="WANAMA — Wild Spirit · Hybrid Campaign" />
+<meta name="twitter:description" content="Where AI meets reality. AI x Real Models across the Argentine frontier." />
+<meta name="twitter:image" content="https://wanama-wild-spirit.netlify.app/og-image.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   WANAMA — WILD SPIRIT PHOTOBOOK
+   Hybrid Campaign: AI x Real Models
+   ═══════════════════════════════════════ */
+
+:root {
+  --black: #080808;
+  --white: #f4f1ec;
+  --cream: #ebe6dd;
+  --gold: #c4a265;
+  --gold-dim: rgba(196,162,101,.4);
+  --grey: #6b6560;
+  --light-grey: #a9a29b;
+  --ease: cubic-bezier(.25, 1, .5, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--gold); color: var(--black); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ═══ PRELOADER ═══ */
+#preloader {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--black);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 1s var(--ease), visibility 1s;
+}
+#preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.pre-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: .4em;
+  overflow: hidden;
+}
+.pre-brand span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: slideUp .7s var(--ease-out) forwards;
+}
+.pre-brand span:nth-child(1) { animation-delay: .1s }
+.pre-brand span:nth-child(2) { animation-delay: .16s }
+.pre-brand span:nth-child(3) { animation-delay: .22s }
+.pre-brand span:nth-child(4) { animation-delay: .28s }
+.pre-brand span:nth-child(5) { animation-delay: .34s }
+.pre-brand span:nth-child(6) { animation-delay: .40s }
+
+.pre-line {
+  width: 0; height: 1px;
+  background: var(--gold);
+  margin-top: 2rem;
+  animation: expandLine 2s var(--ease) .7s forwards;
+}
+.pre-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .75rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-top: 1.2rem;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.2s forwards;
+}
+.pre-progress {
+  position: absolute;
+  bottom: 4rem;
+  font-size: .65rem;
+  letter-spacing: .2em;
+  color: var(--grey);
+  opacity: 0;
+  animation: fadeIn .5s ease 1s forwards;
+}
+
+@keyframes slideUp { to { transform: translateY(0) } }
+@keyframes expandLine { to { width: 140px } }
+@keyframes fadeIn { to { opacity: 1 } }
+
+/* ═══ CUSTOM CURSOR ═══ */
+.cursor-dot, .cursor-ring {
+  position: fixed; border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  transform: translate(-50%, -50%);
+  transition: transform .1s;
+}
+.cursor-ring {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(196,162,101,.5);
+  transform: translate(-50%, -50%);
+  transition: width .4s var(--ease), height .4s var(--ease), border-color .3s;
+}
+.cursor-ring.hover {
+  width: 70px; height: 70px;
+  border-color: var(--white);
+}
+
+/* ═══ NAVIGATION ═══ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; padding: 1.8rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  mix-blend-mode: difference;
+  transition: transform .6s var(--ease);
+}
+.nav.hidden { transform: translateY(-120%) }
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 2.5rem; }
+.nav-links a {
+  font-size: .65rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width .5s var(--ease);
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ═══ PROGRESS BAR ═══ */
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--gold);
+  z-index: 101;
+  transition: width .1s linear;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: -10%;
+  transition: transform .1s linear;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%) contrast(1.05);
+  opacity: .3;
+}
+.hero-content {
+  text-align: center; z-index: 2;
+  padding: 2rem;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .8rem;
+  font-size: .6rem; letter-spacing: .5em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 2.5rem;
+  opacity: 0; transform: translateY(30px);
+}
+.hero-badge .dot {
+  width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 10vw, 10rem);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.03em;
+  opacity: 0; transform: translateY(60px);
+}
+.hero-title em {
+  font-style: italic; color: var(--gold);
+  display: block;
+}
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 300; font-style: italic;
+  color: var(--light-grey);
+  margin-top: 2rem; max-width: 500px;
+  margin-left: auto; margin-right: auto;
+  opacity: 0; transform: translateY(30px);
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem;
+  left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: .6rem;
+  opacity: 0;
+}
+.hero-scroll span {
+  font-size: .55rem; letter-spacing: .4em;
+  text-transform: uppercase; color: var(--grey);
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: pulse 2.5s ease infinite;
+}
+@keyframes pulse { 0%,100% { opacity: .2 } 50% { opacity: 1 } }
+
+/* ═══ SECTION HEADERS ═══ */
+.section-header {
+  padding: 8rem 3rem 3rem;
+  text-align: center;
+}
+.section-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .75rem;
+  letter-spacing: .4em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+.section-divider {
+  width: 50px; height: 1px;
+  background: var(--gold);
+  margin: 1.5rem auto 0;
+}
+
+/* ═══ HYBRID BADGE (AI / REAL) ═══ */
+.badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .55rem; letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: .3rem .8rem;
+  border: 1px solid rgba(196,162,101,.5);
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,.4);
+}
+.badge.ai { border-color: rgba(130,200,255,.5); color: #a0d4ff; }
+.badge.real { border-color: rgba(196,162,101,.5); color: var(--gold); }
+.badge.hybrid {
+  border-color: rgba(196,162,101,.5); color: var(--gold);
+  background: linear-gradient(135deg, rgba(130,200,255,.1), rgba(196,162,101,.1));
+}
+.badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+}
+.badge.ai .badge-dot { background: #a0d4ff; }
+.badge.real .badge-dot { background: var(--gold); }
+.badge.hybrid .badge-dot {
+  background: linear-gradient(135deg, #a0d4ff, var(--gold));
+}
+
+/* ═══ PHOTO LAYOUTS ═══ */
+.photo-section { padding: 2px 0; }
+
+/* Full Bleed */
+.full-bleed {
+  width: 100%; height: 100vh; min-height: 500px;
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.full-bleed img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.full-bleed:hover img { transform: scale(1.04); }
+.photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8,8,8,.8) 0%,
+    rgba(8,8,8,.2) 30%,
+    transparent 60%
+  );
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 4rem 5rem;
+  opacity: 0;
+  transition: opacity .7s var(--ease);
+}
+.full-bleed:hover .photo-overlay { opacity: 1; }
+.photo-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--cream);
+  margin-top: .6rem;
+  max-width: 500px;
+  letter-spacing: .02em;
+}
+
+/* Split (2 columns) */
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  height: 90vh; min-height: 500px;
+}
+.grid-item {
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.grid-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.grid-item:hover img { transform: scale(1.06); }
+.grid-item .badge {
+  position: absolute; top: 1.5rem; left: 1.5rem;
+  z-index: 2;
+  opacity: 0; transform: translateY(-10px);
+  transition: opacity .5s, transform .5s var(--ease);
+}
+.grid-item:hover .badge { opacity: 1; transform: translateY(0); }
+
+/* Asymmetric */
+.asym-grid {
+  display: grid;
+  gap: 2px;
+  height: 92vh; min-height: 500px;
+}
+.asym-grid.left { grid-template-columns: 1.7fr 1fr; }
+.asym-grid.right { grid-template-columns: 1fr 1.7fr; }
+
+/* Cinematic panel */
+.cine-panel {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 85vh;
+}
+.cine-img {
+  overflow: hidden; cursor: pointer;
+  position: relative;
+}
+.cine-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.cine-img:hover img { transform: scale(1.04); }
+.cine-text {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 5rem 6rem;
+  background: var(--black);
+  border-left: 1px solid rgba(196,162,101,.08);
+}
+.cine-look {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .7rem;
+  letter-spacing: .4em;
+  color: var(--gold);
+  margin-bottom: 1.8rem;
+}
+.cine-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 2rem;
+}
+.cine-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--light-grey);
+  line-height: 1.9;
+}
+.cine-meta {
+  margin-top: 3rem;
+  display: flex; gap: 1.5rem;
+}
+
+/* ═══ EDITORIAL QUOTE ═══ */
+.editorial {
+  padding: 10rem 3rem;
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+.editorial-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--cream);
+  position: relative;
+}
+.editorial-quote::before {
+  content: '\201C';
+  font-size: 5rem;
+  color: var(--gold);
+  display: block;
+  line-height: .6;
+  margin-bottom: 1.5rem;
+  font-style: normal;
+}
+.editorial-credit {
+  margin-top: 2.5rem;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.editorial-credit strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ═══ CONCEPT STRIP ═══ */
+.concept-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  padding: 5rem 3rem;
+  border-top: 1px solid rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.concept-item {
+  text-align: center;
+}
+.concept-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--gold);
+}
+.concept-label {
+  font-size: .6rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-top: .5rem;
+}
+.concept-divider {
+  width: 1px; height: 50px;
+  background: rgba(196,162,101,.2);
+}
+
+/* ═══ FILMSTRIP ═══ */
+.filmstrip-section { padding: 2rem 0; overflow: hidden; }
+.filmstrip-track {
+  display: flex;
+  gap: 3px;
+  width: max-content;
+  animation: filmScroll 40s linear infinite;
+}
+.filmstrip-track:hover { animation-play-state: paused; }
+.filmstrip-item {
+  width: 350px; height: 470px;
+  flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+.filmstrip-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: transform 1s var(--ease), filter .6s;
+}
+.filmstrip-item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+.filmstrip-label {
+  position: absolute;
+  bottom: 1.5rem; left: 1.5rem;
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .5s var(--ease);
+}
+.filmstrip-item:hover .filmstrip-label {
+  opacity: 1; transform: translateY(0);
+}
+@keyframes filmScroll {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-50%) }
+}
+
+/* ═══ MOSAIC ═══ */
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 0 0 2px;
+}
+.mosaic-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+}
+.mosaic-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: transform 1s var(--ease), filter .6s;
+}
+.mosaic-item:hover img {
+  transform: scale(1.1);
+  filter: grayscale(0%);
+}
+.mosaic-label {
+  position: absolute;
+  bottom: 1.2rem; left: 1.2rem;
+  font-size: .55rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all .5s var(--ease);
+}
+.mosaic-item:hover .mosaic-label {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ═══ VIDEO SNACKABLE ═══ */
+.video-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+.video-header {
+  padding: 8rem 3rem 3rem;
+  text-align: center;
+}
+.video-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 0 2rem;
+  position: relative;
+}
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(196,162,101,.1);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.video-container video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.video-play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8,8,8,.3);
+  opacity: 0;
+  transition: opacity .4s;
+  pointer-events: none;
+}
+.video-container:hover .video-play-overlay,
+.video-container.paused .video-play-overlay { opacity: 1; }
+.video-play-btn {
+  width: 64px; height: 64px;
+  border: 2px solid rgba(255,255,255,.8);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,.2);
+  transition: transform .3s var(--ease), border-color .3s;
+}
+.video-play-btn svg { margin-left: 3px; }
+.video-container:hover .video-play-btn { transform: scale(1.1); border-color: var(--gold); }
+.video-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(196,162,101,.15), rgba(130,200,255,.08), rgba(196,162,101,.15));
+  z-index: -1;
+  filter: blur(20px);
+  opacity: .6;
+}
+.video-label {
+  text-align: center;
+  padding: 2rem 2rem 1rem;
+  font-size: .6rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.video-context {
+  text-align: center;
+  padding: 0 2rem 6rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.video-context p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--light-grey);
+  line-height: 1.8;
+}
+
+/* ═══ TRIPTYCH GRID ═══ */
+.triptych-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 2px;
+  height: 90vh; min-height: 500px;
+}
+
+@media (max-width: 768px) {
+  .video-carousel { flex-direction: column; gap: 2rem; }
+  .video-container { max-width: 300px; }
+  .triptych-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .triptych-grid .grid-item { height: 60vh; }
+}
+
+/* ═══ CAMPAIGN STATEMENT ═══ */
+.statement {
+  padding: 10rem 3rem;
+  text-align: center;
+  position: relative;
+}
+.statement::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim));
+}
+.statement-label {
+  font-size: .6rem;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+}
+.statement-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  color: var(--light-grey);
+  line-height: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.statement-text strong {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+/* ═══ CREDITS ═══ */
+.credits {
+  padding: 8rem 3rem;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.credits-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: .35em;
+  margin-bottom: 3rem;
+}
+.credits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+.credit-item { text-align: center; }
+.credit-role {
+  font-size: .55rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: .4rem;
+}
+.credit-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--cream);
+}
+.credits-badge {
+  display: inline-flex;
+  align-items: center; gap: .6rem;
+  padding: .7rem 2rem;
+  border: 1px solid var(--gold);
+  font-size: .6rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 2rem;
+}
+.credits-badge svg { flex-shrink: 0; }
+
+.footer {
+  padding: 2rem 3rem;
+  text-align: center;
+  font-size: .5rem;
+  letter-spacing: .15em;
+  color: rgba(255,255,255,.15);
+}
+
+/* ═══ LIGHTBOX ═══ */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(8,8,8,.97);
+  z-index: 9998;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity .5s, visibility .5s;
+  cursor: zoom-out;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img {
+  max-width: 92vw; max-height: 92vh;
+  object-fit: contain;
+  transform: scale(.92);
+  transition: transform .7s var(--ease-out);
+}
+.lightbox.open img { transform: scale(1); }
+
+.lb-close {
+  position: absolute; top: 2rem; right: 3rem;
+  font-size: .65rem; letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: none;
+  border: 1px solid rgba(255,255,255,.15);
+  padding: .5rem 1.2rem;
+  cursor: pointer;
+  transition: border-color .3s, color .3s;
+}
+.lb-close:hover { border-color: var(--gold); color: var(--gold); }
+
+.lb-nav {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--white);
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .3s;
+  font-size: 1.1rem;
+}
+.lb-nav:hover { border-color: var(--gold); color: var(--gold); }
+.lb-prev { left: 2rem; }
+.lb-next { right: 2rem; }
+
+.lb-info {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.lb-counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .85rem;
+  color: var(--grey);
+  letter-spacing: .25em;
+}
+.lb-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .9rem;
+  font-style: italic;
+  color: var(--light-grey);
+  margin-top: .5rem;
+}
+
+/* ═══ SCROLL REVEALS ═══ */
+.reveal {
+  opacity: 0; transform: translateY(50px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-scale {
+  opacity: 0; transform: scale(.96);
+  transition: opacity 1s var(--ease), transform 1.4s var(--ease);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+.reveal-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .split-grid, .asym-grid.left, .asym-grid.right {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .split-grid .grid-item,
+  .asym-grid .grid-item { height: 65vh; }
+  .full-bleed { height: 75vh; }
+  .cine-panel { grid-template-columns: 1fr; }
+  .cine-text { padding: 3rem 2rem; border-left: none; border-top: 1px solid rgba(196,162,101,.08); }
+  .editorial { padding: 6rem 2rem; }
+  .mosaic-grid { grid-template-columns: 1fr 1fr; }
+  .filmstrip-item { width: 250px; height: 340px; }
+  .cursor-dot, .cursor-ring { display: none; }
+  .concept-strip { flex-wrap: wrap; gap: 2rem; }
+  .concept-divider { width: 40px; height: 1px; }
+  .photo-overlay { padding: 2rem; opacity: 1; }
+  .section-header { padding: 5rem 2rem 2rem; }
+  .statement { padding: 6rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ PRELOADER ═══ -->
+<div id="preloader">
+  <div class="pre-brand">
+    <span>W</span><span>A</span><span>N</span><span>A</span><span>M</span><span>A</span>
+  </div>
+  <div class="pre-line"></div>
+  <div class="pre-tagline">Wild Spirit &middot; Hybrid Campaign</div>
+  <div class="pre-progress" id="loadProgress">Loading images...</div>
+</div>
+
+<!-- ═══ CURSOR ═══ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo">Wanama</div>
+  <div class="nav-links">
+    <a href="#collection">Collection</a>
+    <a href="#reel">Reel</a>
+    <a href="#vision">Vision</a>
+    <a href="#filmstrip">Filmstrip</a>
+    <a href="#credits">Credits</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_07.jpg" alt="Wild Spirit Hero">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge">
+      <span>AI</span>
+      <span class="dot"></span>
+      <span>Real Models</span>
+      <span class="dot"></span>
+      <span>Patagonia</span>
+    </div>
+    <h1 class="hero-title" id="heroTitle">
+      Wild<em>Spirit</em>
+    </h1>
+    <p class="hero-subtitle" id="heroSub">
+      Where untamed lands meet fearless fashion &mdash; a hybrid campaign blending AI-generated worlds with real models
+    </p>
+  </div>
+  <div class="hero-scroll" id="heroScroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     I — THE COLLECTION
+     ═══════════════════════════════════════ -->
+<div class="section-header reveal" id="collection">
+  <span class="section-number">I</span>
+  <h2 class="section-title">The Collection</h2>
+  <div class="section-divider"></div>
+</div>
+
+<!-- FOTO 04 — Full Bleed: Eagle & Model (B&W) -->
+<div class="photo-section">
+  <div class="full-bleed reveal-scale" data-photo="0">
+    <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_04.jpg" alt="Model with eagle">
+    <div class="photo-overlay">
+      <span class="badge hybrid"><span class="badge-dot"></span>AI &times; Real</span>
+      <span class="photo-caption">
+        A raptor perched on her arm, the Andes unfolding behind &mdash; where fashion meets the wild frontier
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- FOTO 07 + FOTO 06 — Split: B&W Horses + Cowgirl -->
+<div class="photo-section">
+  <div class="split-grid reveal-scale">
+    <div class="grid-item" data-photo="1">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_07.jpg" alt="Model with wild horses">
+      <span class="badge ai"><span class="badge-dot"></span>AI Environment</span>
+    </div>
+    <div class="grid-item" data-photo="2">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_06.jpg" alt="Cowgirl with horse">
+      <span class="badge real"><span class="badge-dot"></span>Real Model</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EDITORIAL QUOTE ═══ -->
+<section class="editorial reveal">
+  <div class="editorial-quote">
+    We didn't just photograph clothes &mdash; we captured a spirit. AI imagined the impossible landscapes, real models brought the raw emotion. Together, they created something neither could alone
+  </div>
+  <p class="editorial-credit">
+    <strong>Wanama</strong> &times; Planet Lambo &mdash; Creative Direction
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SNACKABLE VIDEO
+     ═══════════════════════════════════════ -->
+<div class="video-section" id="reel">
+  <div class="video-header reveal">
+    <span class="section-number">Reel</span>
+    <h2 class="section-title">Snackable</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="video-carousel reveal-scale">
+    <div class="video-container" data-video>
+      <video src="https://wanama-wild-spirit.netlify.app/photos/wanama.mp4" muted loop playsinline preload="metadata"></video>
+      <div class="video-play-overlay">
+        <div class="video-play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="8,5 20,12 8,19"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="video-container" data-video>
+      <video src="https://wanama-wild-spirit.netlify.app/photos/aguila.mp4" muted loop playsinline preload="metadata"></video>
+      <div class="video-play-overlay">
+        <div class="video-play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="8,5 20,12 8,19"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="video-label reveal">Campaign Reels &middot; AI &times; Real Models</div>
+  <div class="video-context reveal">
+    <p>Quick glimpses into the hybrid production &mdash; from AI-generated Patagonian landscapes to real model direction on set</p>
+  </div>
+</div>
+
+<!-- ═══ CONCEPT STRIP ═══ -->
+<div class="concept-strip reveal">
+  <div class="concept-item">
+    <div class="concept-number">9</div>
+    <div class="concept-label">Looks</div>
+  </div>
+  <div class="concept-divider"></div>
+  <div class="concept-item">
+    <div class="concept-number">2</div>
+    <div class="concept-label">Real Models</div>
+  </div>
+  <div class="concept-divider"></div>
+  <div class="concept-item">
+    <div class="concept-number">&infin;</div>
+    <div class="concept-label">AI Landscapes</div>
+  </div>
+  <div class="concept-divider"></div>
+  <div class="concept-item">
+    <div class="concept-number">1</div>
+    <div class="concept-label">Vision</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     II — THE VISION
+     ═══════════════════════════════════════ -->
+<div class="section-header reveal" id="vision">
+  <span class="section-number">II</span>
+  <h2 class="section-title">The Vision</h2>
+  <div class="section-divider"></div>
+</div>
+
+<!-- FOTO 02 — Cinematic: Barn & Sheep -->
+<div class="photo-section">
+  <div class="cine-panel reveal-scale">
+    <div class="cine-img" data-photo="3">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_02.jpg" alt="Model in barn with sheep">
+      <span class="badge hybrid" style="position:absolute;top:1.5rem;left:1.5rem;z-index:2"><span class="badge-dot"></span>AI &times; Real</span>
+    </div>
+    <div class="cine-text">
+      <span class="cine-look">Look 04</span>
+      <h3 class="cine-title">Floral Camo<br>Meets the Flock</h3>
+      <p class="cine-desc">
+        In a weathered Patagonian barn, surrounded by sheep, the camo-floral Wanama jacket becomes a statement of tender strength &mdash; military precision softened by wildflower prints and the warmth of wool.
+      </p>
+      <div class="cine-meta">
+        <span class="badge real"><span class="badge-dot"></span>Real Model</span>
+        <span class="badge ai"><span class="badge-dot"></span>AI Scene</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOTO 03 + FOTO 01 — Asymmetric -->
+<div class="photo-section">
+  <div class="asym-grid left reveal-scale">
+    <div class="grid-item" data-photo="4">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_03.jpg" alt="Model in steppe with horses">
+      <span class="badge hybrid"><span class="badge-dot"></span>Hybrid</span>
+    </div>
+    <div class="grid-item" data-photo="5">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_01.jpg" alt="Model in white suit">
+      <span class="badge hybrid"><span class="badge-dot"></span>Hybrid</span>
+    </div>
+  </div>
+</div>
+
+<!-- NEW PHOTOS — Triptych: Horseback + Mountain Fur + Cowgirl -->
+<div class="photo-section">
+  <div class="triptych-grid reveal-scale">
+    <div class="grid-item" data-photo="6">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_08_1.jpg" alt="Cowgirl on horseback at sunset">
+      <span class="badge hybrid"><span class="badge-dot"></span>Hybrid</span>
+    </div>
+    <div class="grid-item" data-photo="7">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_10_2_color.jpg" alt="Model with fur coat in mountains">
+      <span class="badge hybrid"><span class="badge-dot"></span>AI &times; Real</span>
+    </div>
+    <div class="grid-item" data-photo="8">
+      <img src="https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_11_1.jpg" alt="Cowgirl with horse at golden hour">
+      <span class="badge hybrid"><span class="badge-dot"></span>Hybrid</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATEMENT ═══ -->
+<section class="statement reveal">
+  <div class="statement-label">The Hybrid Approach</div>
+  <p class="statement-text">
+    This campaign proves that <strong>AI and real photography are not rivals</strong> &mdash; they are creative partners. By blending generative environments with real talent and fashion, we produced a campaign that would have required <strong>international locations, animal wranglers, and a six-figure budget</strong>. Instead, we created something even more cinematic, in a fraction of the time.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════
+     III — FILMSTRIP
+     ═══════════════════════════════════════ -->
+<div class="section-header reveal" id="filmstrip">
+  <span class="section-number">III</span>
+  <h2 class="section-title">Filmstrip</h2>
+  <div class="section-divider"></div>
+</div>
+
+<div class="filmstrip-section">
+  <div class="filmstrip-track" id="filmTrack"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     IV — BEHIND THE LENS
+     ═══════════════════════════════════════ -->
+<div class="section-header reveal">
+  <span class="section-number">IV</span>
+  <h2 class="section-title">Behind the Lens</h2>
+  <div class="section-divider"></div>
+</div>
+
+<div class="mosaic-grid reveal-scale" id="mosaicGrid"></div>
+
+<!-- ═══════════════════════════════════════
+     CREDITS
+     ═══════════════════════════════════════ -->
+<section class="credits reveal" id="credits">
+  <div class="credits-brand">WANAMA</div>
+  <div class="credits-grid">
+    <div class="credit-item">
+      <div class="credit-role">Photography</div>
+      <div class="credit-name">AI &times; Real Models</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Creative Direction</div>
+      <div class="credit-name">Planet Lambo</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">AI Production</div>
+      <div class="credit-name">Generative Imaging</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Brand</div>
+      <div class="credit-name">Wanama Argentina</div>
+    </div>
+  </div>
+  <div class="credits-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M8 12l3 3 5-5"/>
+    </svg>
+    AI &times; Human Collaboration
+  </div>
+</section>
+
+<div class="footer">
+  &copy; 2025 Wanama &middot; Wild Spirit Collection &middot; All rights reserved
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">Close &times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev">&#8592;</button>
+  <button class="lb-nav lb-next" id="lbNext">&#8594;</button>
+  <img id="lbImage" src="" alt="">
+  <div class="lb-info">
+    <div class="lb-counter" id="lbCounter"></div>
+    <div class="lb-desc" id="lbDesc"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ═══ PHOTO DATA ═══
+  const PHOTOS = [
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_04.jpg', label: 'Eagle & Model', desc: 'B&W \u2014 Model with eagle, cowboy hat, Patagonian grasslands', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_07.jpg', label: 'Wild Horses',   desc: 'B&W \u2014 Windswept hair, wild horses running, mountain range', type: 'ai' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_06.jpg', label: 'Cowgirl & Horse', desc: 'Warm tones \u2014 Blonde model with horse, Wanama floral jacket', type: 'real' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_02.jpg', label: 'Barn & Sheep',  desc: 'Warm tones \u2014 Camo-floral jacket, barn doorway, sheep flock', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_03.jpg', label: 'Steppe & Sequins', desc: 'Cowboy hat, poncho, sequin skirt, horses grazing in steppe', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_01.jpg', label: 'White Spirit',  desc: 'White suit, fur stole, cowboy hat, vast mountain steppe', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_08_1.jpg', label: 'Golden Rider', desc: 'Cowgirl on horseback, green hat, fringed jacket, golden sunset', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_10_2_color.jpg', label: 'Mountain Fur', desc: 'Fur-trimmed jacket, snowy peaks, dramatic golden light', type: 'hybrid' },
+    { src: 'https://wanama-wild-spirit.netlify.app/photos/Wanama_Foto_11_1.jpg', label: 'Prairie Bond', desc: 'Suede jacket, braided horse reins, golden hour mountains', type: 'hybrid' },
+  ];
+
+  // ═══ PRELOADER ═══
+  let loadedCount = 0;
+  const totalImages = PHOTOS.length;
+  const progressEl = document.getElementById('loadProgress');
+
+  function preloadImages() {
+    return Promise.all(PHOTOS.map(p => new Promise(resolve => {
+      const img = new Image();
+      img.onload = img.onerror = () => {
+        loadedCount++;
+        if (progressEl) progressEl.textContent = `Loading ${loadedCount}/${totalImages}`;
+        resolve();
+      };
+      img.src = p.src;
+    })));
+  }
+
+  preloadImages().then(() => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+      animateHero();
+    }, 2000);
+  });
+
+  // ═══ HERO ANIMATION ═══
+  function animateHero() {
+    const badge = document.getElementById('heroBadge');
+    const title = document.getElementById('heroTitle');
+    const sub   = document.getElementById('heroSub');
+    const scroll = document.getElementById('heroScroll');
+
+    setTimeout(() => { badge.style.transition = 'opacity 1s, transform 1s'; badge.style.opacity = '1'; badge.style.transform = 'translateY(0)'; }, 200);
+    setTimeout(() => { title.style.transition = 'opacity 1.2s, transform 1.2s'; title.style.opacity = '1'; title.style.transform = 'translateY(0)'; }, 500);
+    setTimeout(() => { sub.style.transition = 'opacity 1s, transform 1s'; sub.style.opacity = '1'; sub.style.transform = 'translateY(0)'; }, 900);
+    setTimeout(() => { scroll.style.transition = 'opacity 1s'; scroll.style.opacity = '1'; }, 1300);
+  }
+
+  // ═══ CUSTOM CURSOR ═══
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  function animateCursor() {
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    dot.style.left  = mx + 'px';
+    dot.style.top   = my + 'px';
+    ring.style.left  = rx + 'px';
+    ring.style.top   = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  if (window.innerWidth > 768) animateCursor();
+
+  document.querySelectorAll('a,button,.grid-item,.full-bleed,.filmstrip-item,.cine-img,.mosaic-item,[data-photo]').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  // ═══ SCROLL: NAV HIDE ═══
+  let lastScroll = 0;
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    nav.classList.toggle('hidden', s > lastScroll && s > 120);
+    lastScroll = s;
+  }, { passive: true });
+
+  // ═══ SCROLL: PROGRESS BAR ═══
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / h) * 100;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // ═══ SCROLL: PARALLAX HERO ═══
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    if (s < window.innerHeight * 1.5) {
+      heroBg.style.transform = `translateY(${s * .25}px) scale(${1 + s * .0002})`;
+    }
+  }, { passive: true });
+
+  // ═══ SCROLL: REVEAL ANIMATIONS ═══
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // ═══ BUILD FILMSTRIP ═══
+  const filmTrack = document.getElementById('filmTrack');
+  const doubled = [...PHOTOS, ...PHOTOS];
+  doubled.forEach((p, i) => {
+    const idx = i % PHOTOS.length;
+    const div = document.createElement('div');
+    div.className = 'filmstrip-item';
+    div.dataset.photo = String(idx);
+    div.innerHTML = `<img src="${p.src}" alt="${p.label}" loading="lazy"><span class="filmstrip-label">${p.label}</span>`;
+    div.addEventListener('click', () => openLightbox(idx));
+    filmTrack.appendChild(div);
+  });
+
+  // ═══ BUILD MOSAIC ═══
+  const mosaicGrid = document.getElementById('mosaicGrid');
+  PHOTOS.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'mosaic-item';
+    div.dataset.photo = String(i);
+    div.innerHTML = `<img src="${p.src}" alt="${p.label}" loading="lazy"><span class="mosaic-label">${p.label}</span>`;
+    div.addEventListener('click', () => openLightbox(i));
+    mosaicGrid.appendChild(div);
+  });
+
+  // ═══ LIGHTBOX ═══
+  const lightbox  = document.getElementById('lightbox');
+  const lbImage   = document.getElementById('lbImage');
+  const lbCounter = document.getElementById('lbCounter');
+  const lbDesc    = document.getElementById('lbDesc');
+  let currentIdx = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    lbImage.src = PHOTOS[idx].src;
+    lbCounter.textContent = `${idx + 1} / ${PHOTOS.length}`;
+    lbDesc.textContent = PHOTOS[idx].desc;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function navLightbox(dir) {
+    currentIdx = (currentIdx + dir + PHOTOS.length) % PHOTOS.length;
+    lbImage.src = PHOTOS[currentIdx].src;
+    lbCounter.textContent = `${currentIdx + 1} / ${PHOTOS.length}`;
+    lbDesc.textContent = PHOTOS[currentIdx].desc;
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); navLightbox(-1); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); navLightbox(1); });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') navLightbox(1);
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+  });
+
+  // Click handlers for static photo elements
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    if (!el.closest('.filmstrip-track') && !el.closest('.mosaic-grid')) {
+      el.addEventListener('click', () => openLightbox(+el.dataset.photo));
+    }
+  });
+
+  // ═══ VIDEO SNACKABLE ═══
+  document.querySelectorAll('[data-video]').forEach(container => {
+    const vid = container.querySelector('video');
+    if (!vid) return;
+
+    // Autoplay when scrolled into view
+    const vObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          vid.play().catch(() => {});
+          container.classList.remove('paused');
+        } else {
+          vid.pause();
+          container.classList.add('paused');
+        }
+      });
+    }, { threshold: .4 });
+    vObs.observe(container);
+
+    // Toggle play/pause on click
+    container.addEventListener('click', () => {
+      if (vid.paused) { vid.play(); container.classList.remove('paused'); }
+      else { vid.pause(); container.classList.add('paused'); }
+    });
+
+    // Unmute on first click
+    container.addEventListener('click', () => { vid.muted = false; }, { once: true });
+  });
+
+})();
+</script>
+</body>
+</html>
